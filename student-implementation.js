@@ -132,7 +132,7 @@ async function generateScript(articles) {
         // HINT: Need Authorization: Bearer YOUR_API_KEY and Content-Type: application/json
         const headers = {
             // Add headers here
-            'Authorization': 'Bearer ${process.env.OPENAI_API_KEY}',
+            'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
             'Content-Type': 'application/json'
         };
         
@@ -210,7 +210,7 @@ async function generateAudio(text) {
         
         // TODO: Construct the URL with voice ID
         // HINT: `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`
-        const url = 'https://api.elevenlabs.io/v1/text-to-speech/${voiceId}';
+        const url = `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`;
         
         // TODO: Set up headers (IMPORTANT: ElevenLabs uses 'xi-api-key', not 'Authorization'!)
         const headers = {
