@@ -118,20 +118,22 @@ async function generateScript(articles) {
     try {
         // TODO: Format articles for the AI
         // HINT: Use helpers.formatArticlesForSummary(articles)
-        const formattedNews = '';
+        const formattedNews = helpers.formatArticlesForSummary(articles);
         
         // TODO: Create the AI prompt
         // HINT: Use helpers.createPodcastPrompt(formattedNews)
-        const prompt = '';
+        const prompt = helpers.createPodcastPrompt(formattedNews);
         
         // TODO: Define the OpenAI endpoint
         // HINT: https://api.openai.com/v1/chat/completions
-        const url = '';
+        const url = 'https://api.openai.com/v1/chat/completions';
         
         // TODO: Set up request headers
         // HINT: Need Authorization: Bearer YOUR_API_KEY and Content-Type: application/json
         const headers = {
             // Add headers here
+            'Authorization': 'Bearer ${process.env.OPENAI_API_KEY}',
+            'Content-Type': 'application/json'
         };
         
         // TODO: Create the request body
@@ -150,17 +152,18 @@ async function generateScript(articles) {
         
         // TODO: Make the POST request
         // HINT: await axios.post(url, data, { headers })
-        const response = null;
+        const response = await axios.post(url, data, { headers });
         
         // TODO: Extract the script text
         // HINT: response.data.choices[0].message.content
-        const script = '';
+        const script = response.data.choices[0].message.content;
         
         helpers.logSuccess('Podcast script generated');
         console.log(`   Script length: ${script.length} characters`);
         
         // TODO: Save the script to a file
         // HINT: Use helpers.saveTextFile(script, 'podcast-script.txt')
+        helpers.saveTextFile(script, 'podcast-script.txt');
         
         return script;
         
