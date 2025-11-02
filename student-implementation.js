@@ -206,11 +206,11 @@ async function generateAudio(text) {
     try {
         // TODO: Get the voice ID from environment or use default
         // HINT: process.env.PODCAST_VOICE_ID || '21m00Tcm4TlvDq8ikWAM'
-        const voiceId = '21m00Tcm4TlvDq8ikWAM';
+        const voiceId = process.env.PODCAST_VOICE_ID || '21m00Tcm4TlvDq8ikWAM';
         
         // TODO: Construct the URL with voice ID
         // HINT: `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`
-        const url = '';
+        const url = 'https://api.elevenlabs.io/v1/text-to-speech/${voiceId}';
         
         // TODO: Set up headers (IMPORTANT: ElevenLabs uses 'xi-api-key', not 'Authorization'!)
         const headers = {
@@ -231,15 +231,18 @@ async function generateAudio(text) {
         
         // TODO: Make the POST request (IMPORTANT: Must use responseType: 'arraybuffer'!)
         // HINT: await axios.post(url, data, { headers, responseType: 'arraybuffer' })
-        const response = null;
+        const response = await axios.post(url, data, {
+            headers,
+            responseType: 'arraybuffer'
+        });
         
         // TODO: Generate a filename with timestamp
         // HINT: Use helpers.generateTimestampedFilename('podcast', 'mp3')
-        const filename = 'podcast.mp3';
+        const filename = helpers.generateTimestampedFilename('podcast', 'mp3');
         
         // TODO: Save the audio file
         // HINT: Use helpers.saveAudioFile(response.data, filename)
-        const filePath = '';
+        const filePath = helpers.saveAudioFile(response.data, filename);
         
         helpers.logSuccess(`Audio generated: ${filename}`);
         
