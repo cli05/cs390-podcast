@@ -300,7 +300,7 @@ async function generatePodcast() {
         
         // TODO: Fetch news articles
         // HINT: await fetchNews()
-        const articles = null;
+        const articles = await fetchNews();
         
         // TODO: Validate we got articles
         if (!articles || articles.length === 0) {
@@ -309,7 +309,7 @@ async function generatePodcast() {
         
         // TODO: Generate podcast script
         // HINT: await generateScript(articles)
-        const script = null;
+        const script = await generateScript(articles);
         
         // TODO: Validate we got a script
         if (!script || script.length === 0) {
@@ -318,7 +318,7 @@ async function generatePodcast() {
         
         // TODO: Generate audio
         // HINT: await generateAudio(script)
-        const audioFilePath = null;
+        const audioFilePath = await generateAudio(script);
         
         // TODO: Validate we got an audio file
         if (!audioFilePath) {
